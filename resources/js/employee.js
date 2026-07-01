@@ -191,7 +191,7 @@ function updateEmployee(id) {
 
 // Create editEmployee()
 
-function editEmployee(id) {
+window.editEmployee = function(id) {
 
     $.ajax({
 
@@ -223,7 +223,7 @@ function editEmployee(id) {
 
 // Create deleteEmployee()
 
-function deleteEmployee(id) {
+window.deleteEmployee = function(id) {
 
     if (!confirm("Are you sure?")) {
 
