@@ -35,8 +35,8 @@ return [
         ],
     ],
 
-    // 'face_ai' => [
-    // 'url' => env('FACE_AI_URL'),
-//],
+    'face_ai' => [
+    'url' => env('FACE_AI_URL'),
+],
 
 ];

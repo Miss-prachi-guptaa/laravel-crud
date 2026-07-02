@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\AttendanceService;
 use App\Http\Requests\RegisterFaceRequest;
+use App\Http\Requests\MarkAttendanceRequest;
 
 use Illuminate\Http\Request;
 
@@ -20,9 +21,11 @@ class AttendanceController extends Controller
 
     public function registerFace(RegisterFaceRequest $request)
 {
-       $user = User::latest()->first();
 
-       //$user = $request->user(); integration k time 
+    // TODO:
+ // Replace with $request->user() after authentication integration.
+
+       $user = User::where('empid', $request->empid)->first();
 
     if (!$user) {
         return response()->json([
@@ -41,11 +44,44 @@ class AttendanceController extends Controller
 
 public function today(Request $request)
 {
+    // TODO:
+    // Replace with authenticated user after login integration.
+    // Current:
+    // $user = User::where('empid', $request->empid)->first();
+    //
+    // Future:
+    // $user = $request->user();
 
+    $user = User::where('empid', $request->empid)->first();
+
+    if (!$user) {
+        return response()->json([
+            'success' => false,
+            'message' => 'User not found.'
+        ], 404);
+    }
+
+    return response()->json(
+        $this->attendanceService->todayAttendance($user)
+    );
 }
 
-public function markAttendance(MarkAttendanceRequest $request)
+public function markAttendance(
+    MarkAttendanceRequest $request
+)
 {
+      // TODO:
+// Replace with authenticated user after login integration.
+// Current:
+// $user = User::where('empid', $request->empid)->first();
+//
+// Future:
+// $user = $request->user();
+      $user = User::where('empid', $request->empid)->first();
 
+    return $this->attendanceService->markAttendance(
+        $user,
+        $request->file('image')
+    );
 }
 }

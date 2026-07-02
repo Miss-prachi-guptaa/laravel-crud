@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+//validation request for face registration
 class RegisterFaceRequest extends FormRequest
 {
     /**
